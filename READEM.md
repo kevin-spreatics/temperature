@@ -9,7 +9,7 @@
    - heater (boolean) : 히터 상태 (true: ON, false: OFF)
 ~~~
 {
-  "temperature": "25.5",
+  "temperature": "25.3",
   "fan": "flase",
   "heater": "true"
 }
@@ -23,7 +23,7 @@
 ~~~
 {
   "status": "success",
-  "temperature" : 25.5
+  "temperature" : 25.3
 }
 {
   "status": "failed",
@@ -45,7 +45,8 @@
 ~~~
 3. Description
    - 사용자가 설정한 온도를 서버에 저장
-   - 아두이노가 새로운 설정값 
+   - 아두이노가 새로운 설정값 업데이트
+     
 4. Response body
    - status (string): success, failed
    - reason (string): 실패 시, 실패 원인
@@ -66,8 +67,9 @@
    - 없음
 
 3. Description
-   - 아두이노가 현재 설정 온도를 가져감
+   - 아두이노가 현재 설정 온도 업데이트
    - 만약 Tempterature가 -1이면 fan,heater OFF
+   - 
 4. Response body
    - status (string): success, failed
    - temperature (float) : 설정된 목표 온도
