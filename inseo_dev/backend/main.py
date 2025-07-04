@@ -22,7 +22,7 @@ def status():
     fan = data.get('fan')
     heater = data.get('heater')
 
-    if not temperature or not fan or not heater:
+    if temperature is None or fan is None or heater is None:
         return {"status":"failed", "reason":"Temperature, fan, and heater are required inputs."}
     
     conn = get_connection()
@@ -39,11 +39,10 @@ def status():
             search_sql = """
             SELECT *
             FROM status
-            ORDER BY created_at DESC 
-            LIMIT 1
             """
             cursor.execute(search_sql)
-            return {"status": "success", "info": cursor.fetchone()}
+            row = cursor.fetchone()
+            return {"status": "success", "info": row}
 
     except pymysql.err.IntegrityError as e:
         return { "status": "failed", "reason": str(e) }
@@ -60,7 +59,8 @@ def get_temperature():
             FROM setting
             """
             cursor.execute(search_sql)
-            return {"status": "success", "input_temperature": cursor.fetchone()}
+            row = cursor.fetchone()
+            return {"status": "success", "input_temperature": row["temperature"]}
 
     except pymysql.err.IntegrityError as e:
         return { "status": "failed", "reason": str(e) }
@@ -81,7 +81,7 @@ def setting_temperature():
             update_sql = """
             UPDATE setting
             SET temperature = %s
-            WHERE temperature_id = 1
+            WHERE setting_id = 1
             """
             cursor.execute(update_sql, (temperature, ))
             conn.commit()
@@ -91,7 +91,10 @@ def setting_temperature():
             FROM setting
             """
             cursor.execute(search_sql)
-            return {"status": "success", "input_temperature": cursor.fetchone()}
+            row = cursor.fetchone()
+            return {"status": "success", "input_temperature": row}
 
     except pymysql.err.IntegrityError as e:
         return { "status": "failed", "reason": str(e) }
+
+app.run(debug=True, host='0.0.0.0', port=5000)

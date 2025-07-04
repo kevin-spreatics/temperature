@@ -32,6 +32,7 @@
      - temperature (int) : 현재 온도
      - fan (bool): 팬 작동여부
      - heater (bool): 히터 작동여부
+     - time (datetime) : 전달된 시간
    - reason (string): 실패 시, 실패 원인
 
 ```
@@ -41,6 +42,7 @@
         "temperature": xx,
         "fan": false,
         "heater": true
+        "time": "Fri, 04 Jul 2025 03:30:55 GMT"
     }
 }
 ```
