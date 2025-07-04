@@ -67,7 +67,7 @@ def get_temperature():
 
 # 사용자가 온도 설정하기
 @app.route('/setting', methods=['POST'])
-def get_temperature():
+def setting_temperature():
     data = request.get_json(silent=True) or {}
     temperature = data.get('temperature')
 
