@@ -8,7 +8,7 @@ CORS(app)
 # MySQL 연결 설정
 db = pymysql.connect(
     host='database-1.cts2qeeg0ot5.ap-northeast-2.rds.amazonaws.com',
-    user='gamza',
+    user='pdohee',
     password='gamzagoguma',
     database='temperature_dohee',
     charset='utf8',
