@@ -4,8 +4,8 @@ from datetime import datetime
 app = Flask(__name__)
 def get_connection():
     return pymysql.connect(
-        host='localhost',
-        user='doubled',
+        host='database-1.cts2qeeg0ot5.ap-northeast-2.rds.amazonaws.com',
+        user='kevin',
         password='spreatics*',
         db='temperature_doubled',
         charset='utf8mb4',
@@ -28,14 +28,15 @@ def receive_status():
             )
         conn.commit()
         return {"status": "success"}
-    
+    finally :
+        conn.close()
 @app.route('/setting', methods=['GET'])
 def get_setting():
     conn = get_connection()
     try:
         with conn.cursor() as cursor:
             # 가장 최근 온도 1개만 가져오기
-            cursor.execute("SELECT temperature FROM setting ORDER BY datetime DESC LIMIT 1")
+            cursor.execute("SELECT temperature FROM setting ORDER BY created_at DESC LIMIT 1")
             row = cursor.fetchone()
             temp = row['temperature']
             if temp == -1:
@@ -48,7 +49,8 @@ def get_setting():
                 return {
                     "temperature": temp
                 }
-
+    finally:
+        conn.close()
 #3. 사용자가 온도 설정하기 
 @app.route('/setting', methods=['POST'])
 def set_setting():
@@ -66,6 +68,9 @@ def set_setting():
             "status": "success",
             "temperature": temperature
         }
+    finally :
+        conn.close()
 
+if __name__ == '__main__':
+    app.run(debug=True)
 
-app.run(debug=True,host = '0.0.0.0', port = 5000)
