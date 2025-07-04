@@ -7,7 +7,7 @@ CORS(app)
 
 # MySQL 연결 설정
 db = pymysql.connect(
-    host='localhost',
+    host='database-1.cts2qeeg0ot5.ap-northeast-2.rds.amazonaws.com',
     user='gamza',
     password='gamzagoguma',
     database='temperature_dohee',
@@ -79,4 +79,4 @@ def post_setting():
 
 
 if __name__ == '__main__':
-    app.run(host='127.0.0.0', port=5000)
+    app.run(host='0.0.0.0', port=5000)
