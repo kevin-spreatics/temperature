@@ -52,7 +52,7 @@ def get_setting():
         conn = get_connection()
         with conn.cursor() as cursor:
             cursor.execute(
-                "SELECT temperature FROM setting ORDER BY id DESC LIMIT 1")
+                "SELECT temperature FROM setting ORDER BY time DESC LIMIT 1")
             row = cursor.fetchone()
         conn.close()
 
