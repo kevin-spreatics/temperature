@@ -65,6 +65,7 @@
 3. Description
 
    - 현재 설정된 온도를 가져온다.
+   - 설정된 온도가 -1 이면 fan, heater 모두 끄기.
 
 4. Response body
 
@@ -93,7 +94,7 @@
    - POST /setting
 
 2. Request body
-   - temperature (int): 현재 온도, 필수
+   - input_temperature (int): 설정할 온도, 필수
 
 ```
 {
