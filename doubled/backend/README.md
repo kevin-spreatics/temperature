@@ -35,3 +35,8 @@
 ## 사용자가 온도 설정하기
 1. Endpoint
   - Post/setting
+2. request bodu
+   - temperature(float)
+3. description
+4. response body
+   - stauts : 성공
