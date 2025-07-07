@@ -3,10 +3,10 @@ import pymysql
 
 def get_connection():
     return pymysql.connect(
-        host="localhost",
-        user="root",
-        db="temperature_choi_temperature",
-        password="gmdtm457^^",
+        host="database-1.cts2qeeg0ot5.ap-northeast-2.rds.amazonaws.com",
+        user="kevin",
+        db="temperature_choi",
+        password="spreatics*",
         charset="utf8mb4",
         cursorclass=pymysql.cursors.DictCursor
     )
