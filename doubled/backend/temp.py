@@ -1,6 +1,7 @@
 from flask import Flask, request, jsonify
 import pymysql
 from datetime import datetime 
+import time
 app = Flask(__name__)
 def get_connection():
     return pymysql.connect(
@@ -72,5 +73,5 @@ def set_setting():
         conn.close()
 
 if __name__ == '__main__':
-    app.run(debug=True,port = 5000,host = 0.0.0.0)
+    app.run(debug=True, port = 5000, host = "0.0.0.0" )
 
