@@ -14,7 +14,7 @@
 }
 ~~~
   3. Description
-     * 아두이노가 센서로 내부 온도, 히터/팬 작동 유무를 읽어와서 보낸다.
+     * 아두이노가 센서로 내부 온도, 히터/팬 작동 유무를 읽어와서 DB로 보낸다.
   4. Response body
      * result (string): Entered, failed
      * time (string): 입력 성공 시, 데이터 입력 시간
