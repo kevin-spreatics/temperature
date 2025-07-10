@@ -1,4 +1,4 @@
-from flask import Flask, request
+from flask import Flask, request, jsonify
 import pymysql
 
 def get_connection():
@@ -22,7 +22,7 @@ def temp_status():
     heater = data['heater']
 
     if((temperature is None) or (fan is None) or (heater is None)):
-        return {"result": "failed", "reason": "Data is not entered."}
+        return jsonify({"result": "failed", "reason": "Data is not entered."})
     
     conn = get_connection()
 
@@ -41,7 +41,7 @@ def temp_status():
 
         rows = cursor.fetchall()
 
-        return {"result": "Entered", "time": rows[0]['time']}
+        return jsonify({"result": "Entered", "time": rows[0]['time']})
     
 # 사용자가 온도 설정하기
 @app.route('/setting', methods=['POST'])
@@ -51,7 +51,7 @@ def user_temp_set():
     temperature = data['temperature']
 
     if(temperature is None):
-        return {"result": "failed", "reason": "Put setting temperature."}
+        return jsonify({"result": "failed", "reason": "Put setting temperature."})
     
     conn = get_connection()
 
@@ -61,7 +61,7 @@ def user_temp_set():
         cursor.execute(sql, (temperature, ))
         conn.commit()
 
-        return {"result": "Entered", "temperature": temperature}
+        return jsonify({"result": "Entered", "temperature": temperature})
     
 # 아두이노가 설정된 온도를 가져오기
 @app.route('/setting')
@@ -77,6 +77,6 @@ def get_set_temp():
 
         rows = cursor.fetchall()
 
-        return {"result": "selected", "temperature": rows[0]['temperature']}
+        return jsonify({"result": "selected", "temperature": rows[0]['temperature']})
     
 app.run(debug=True, host='0.0.0.0', port=5000)
