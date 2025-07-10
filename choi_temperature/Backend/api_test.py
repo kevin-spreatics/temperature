@@ -1,4 +1,4 @@
-from flask import Flask, request
+from flask import Flask, request, jsonify
 import pymysql
 
 def get_connection():
@@ -77,6 +77,6 @@ def get_set_temp():
 
         rows = cursor.fetchall()
 
-        return {"result": "selected", "temperature": rows[0]['temperature']}
+        return jsonify({"result": "selected", "temperature": rows[0]['temperature']})
     
 app.run(debug=True, host='0.0.0.0', port=5000)
